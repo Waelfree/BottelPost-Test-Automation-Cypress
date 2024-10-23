@@ -14,7 +14,29 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
-// Alternatively you can use CommonJS syntax:
-// require('./commands')
+/**
+ * @author Wael Chaouch <waelmok115@gmail.com>
+ * @copyright
+ */
+// Disable FETCH & XHR logs in Cypress
+const app = window.top;
+// @ts-ignore
+if (!app.document.head.querySelector('[data-hie-command-log-request]')) {
+    // @ts-ignore
+    const style = app.document.createElement('style');
+    style.innerHTML = ".command-name-request, .command-name-xhr { display: none }"
+    style.setAttribute('data-hide-command-log-request', "");
+    // @ts-ignore
+    app.document.head.appendChild(style);
+}
+
+declare global {
+    namespace Cypress {
+        interface Chainable {
+            verifyElementExists(selector: string, exists: boolean): void;
+            hasElementVisible(selector: string): void;
+        }
+    }
+}

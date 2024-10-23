@@ -17,6 +17,8 @@ export default defineConfig({
     specPattern: ['**/*.feature', '**/*.cy.ts'],
     baseUrl: process.env.BASE_URL,
     pageLoadTimeout: 60000,
+    watchForFileChanges: false,
+    experimentalStudio: true,
 
     async setupNodeEvents(on, config) {
       // implement node event listeners here
